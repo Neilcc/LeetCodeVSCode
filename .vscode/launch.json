@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MyCalendarTwo",
+            "request": "launch",
+            "mainClass": "MyCalendarTwo",
+            "projectName": ".leetcode_f6a3444a"
+        }
+    ]
+}
