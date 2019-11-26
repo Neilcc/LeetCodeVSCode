@@ -20,17 +20,54 @@ public class Codec {
     public String serialize(TreeNode root) {
         if (root == null)
             return null;
-        int height = height(root);
-        List<String> ret = new ArrayList<>();
-        travel(ret, root, 0, height);
-        String retS = "";
-        for (String ss : ret) {
-            if (!retS.isEmpty()) {
-                retS += DIV;
+        // int height = height(root);
+        // List<String> ret = new ArrayList<>();
+        // travel(ret, root, 0, height);
+        // String retS = "";
+        // for (String ss : ret) {
+        //     if (!retS.isEmpty()) {
+        //         retS += DIV;
+        //     }
+        //     retS += ss;
+        // }
+        // return retS;
+        return bfsTravel(root);
+    }
+
+
+    private String bfsTravel(TreeNode root){
+        StringBuilder sb = new StringBuilder();
+        Queue<TreeNode> tree = new LinkedList<TreeNode>();
+        tree.add(root);
+        boolean hasval = false;
+        while(tree.size() > 0){
+            int curSize = tree.size();
+            boolean showContinue = false;
+            for(int i = 0; i < curSize; i++){
+                TreeNode node = tree.poll();
+                if(!hasval){
+                    hasval = true;
+                }else{
+                    sb.append(DIV);
+                }
+                if(node == null){
+                    sb.append(NULL);
+                    tree.add(null);
+                    tree.add(null);
+                }else{
+                    if(node.left !=null || node.right !=null){
+                        showContinue = true;
+                    }
+                    sb.append(node.val);
+                    tree.add(node.left);
+                    tree.add(node.right);
+                }
             }
-            retS += ss;
+            if(!showContinue){
+                break;
+            }
         }
-        return retS;
+        return sb.toString();
     }
 
     // Decodes your encoded data to tree.
